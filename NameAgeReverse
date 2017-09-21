@@ -1,0 +1,74 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.util.Scanner;
+public class NameAgeReverse 
+{
+
+	public static void main(String[] args) throws FileNotFoundException
+	{
+		
+	  Scanner keyboard = new Scanner(System.in);
+	  Scanner file = null;
+	  PrintWriter outputStream = null;
+	  
+        /**
+           Prompts the user to type in the name of the input file containing the names 
+           and ages. In this case: nameAge.txt
+        */
+        System.out.println("Type the name of the input file you would like reversed. Include the file type extension ex: .txt, .doc, etc..: ");
+        String line = keyboard.nextLine();
+
+         /**
+           Prompts the user to name the output file that will be generated after the 
+           reversal is performed.
+        */
+        System.out.println("What would you like to name the output file? Include the file type extension ex: .txt, .doc, etc.. : ");
+        String line2 = keyboard.nextLine();
+	  
+        try 
+        {
+            outputStream = 
+            //Creating a new outputstream and naming it according to user input
+            new PrintWriter(new FileOutputStream(line2));
+
+            //Creating a Scanner object and reading in the file that will be reversed
+            file = new Scanner(new FileInputStream(line));
+            System.out.println(line);	
+        } 
+    
+        //Exception to deal with a file not being found
+        catch (FileNotFoundException e)
+        {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+         //Counter variable to keep track of the lines in the file.
+         int count = 0;
+         
+          /** 
+              While the file has text read each line 
+              and write the contents of the file in reverse
+              to an output stream.
+          *//
+          while(file.hasNextLine())
+          {
+             String name = file.next();
+             String age = file.next();
+             count++;
+             outputStream.println(age + "\t" + name);
+          }//End loop
+	  
+   //Alerting the user as to how many lines were processed 
+	 System.out.println(count + "" +  " lines were processed");
+	  
+    //Closing the file and output stream
+	  file.close();
+	  outputStream.close();
+	}//End main.
+		
+}//End class.
+
+
